@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #ffe6e6;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+            position: relative;
+            width: 100%;
+            height: 100vh;
+        }
+        .message {
+            font-size: 2em;
+            color: #ff4d4d;
+            margin-bottom: 30px;
+            animation: fadeIn 1s ease-in;
+        }
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            animation: fadeIn 1s ease-in 0.5s backwards;
+        }
+        .response-button {
+            background: linear-gradient(145deg, #ff6b6b, #ff8787);
+            border: none;
+            border-radius: 25px;
+            padding: 15px 30px;
+            font-size: 18px;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        .response-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+        }
+        #yes-btn {
+            background: linear-gradient(145deg, #ff4d4d, #ff6b6b);
+        }
+        #btn-random {
+            background: linear-gradient(145deg, #ff8787, #ffa4a4);
+            position: absolute;
+        }
+        .celebration-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffe6e6;
+        }
+        .celebration-message {
+            font-size: 3em;
+            color: #ff0000;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease-in;
+        }
+        .heart-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            animation: scaleHeart 1.5s infinite;
+        }
+        .love-message {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 1.5em;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+        }
+        @keyframes scaleHeart {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="message">¿Serás mi San Valentín?</div>
+        <div class="buttons">
+            <button id="yes-btn" class="response-button" onclick="acceptValentine()">¡Sí!</button>
+            <button id="btn-random" class="response-button">No</button>
+        </div>
+    </div>
+
+    <script>
+        const btnNo = document.querySelector("#btn-random")
+
+        function moverAleatoriamente(btn) {
+            btn.style.position = "absolute";
+            btn.style.fontWeight = "bolder";
+            btn.style.top = Math.floor(Math.random() * 90 + 5) + "%"
+            btn.style.left = Math.floor(Math.random() * 90 + 5) + "%"
+        }
+
+        btnNo.addEventListener("mouseenter", function(e) {
+            moverAleatoriamente(e.target)
+        })
+
+        function acceptValentine() {
+            document.body.innerHTML = `
+                <div class="celebration-container">
+                    <div class="celebration-message">¡Yay! ❤️</div>
+                    <div class="heart-container">
+                        <svg viewBox="0 0 100 100" width="200" height="200">
+                            <path d="M50 80 C25 50 0 35 0 20 C0 5 15 0 25 0 C35 0 45 5 50 20 C55 5 65 0 75 0 C85 0 100 5 100 20 C100 35 75 50 50 80" 
+                                  fill="red">
+                                <animate attributeName="d" 
+                                    values="M50 80 C25 50 0 35 0 20 C0 5 15 0 25 0 C35 0 45 5 50 20 C55 5 65 0 75 0 C85 0 100 5 100 20 C100 35 75 50 50 80;
+                                            M50 85 C20 55 0 40 0 25 C0 10 15 5 25 5 C35 5 45 10 50 25 C55 10 65 5 75 5 C85 5 100 10 100 25 C100 40 80 55 50 85;
+                                            M50 80 C25 50 0 35 0 20 C0 5 15 0 25 0 C35 0 45 5 50 20 C55 5 65 0 75 0 C85 0 100 5 100 20 C100 35 75 50 50 80" 
+                                    dur="1.5s" 
+                                    repeatCount="indefinite"/>
+                            </path>
+                        </svg>
+                        <div class="love-message">I love you</div>
+                    </div>
+                </div>
+            `;
+
+            // Crear efecto de confeti de corazones
+            for(let i = 0; i < 50; i++) {
+                createHeart();
+            }
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.style.position = 'fixed';
+            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = -20 + 'px';
+            heart.innerHTML = '❤️';
+            heart.style.animation = `
+                float ${Math.random() * 2 + 3}s linear infinite,
+                fadeIn 1s ease-in
+            `;
+            document.body.appendChild(heart);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: white;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .card-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+        }
+        .button-container {
+            text-align: center;
+        }
+        .valentine-button {
+            background: linear-gradient(145deg, #ff6b6b, #ff8787);
+            border: none;
+            border-radius: 25px;
+            padding: 15px 30px;
+            font-size: 18px;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .valentine-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+            animation: pulse 1s infinite;
+        }
+        .valentine-button:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 10px rgba(255, 107, 107, 0.3);
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card-container">
+            <svg width="300" height="300" viewBox="0 0 300 300">
+                <!-- Corazones flotantes -->
+                <path class="floating-heart heart-1" d="M30 80 C25 70 15 70 10 80 C5 90 15 100 30 110 C45 100 55 90 50 80 C45 70 35 70 30 80" fill="red">
+                    <animate attributeName="transform" values="translate(0,0); translate(0,-10); translate(0,0)" dur="2s" repeatCount="indefinite"/>
+                </path>
+                <path class="floating-heart heart-2" d="M270 80 C265 70 255 70 250 80 C245 90 255 100 270 110 C285 100 295 90 290 80 C285 70 275 70 270 80" fill="red">
+                    <animate attributeName="transform" values="translate(0,0); translate(0,-10); translate(0,0)" dur="2s" repeatCount="indefinite" begin="0.5s"/>
+                </path>
+
+                <!-- Sobre -->
+                <path d="M50 100 L250 100 L250 250 L50 250 Z" fill="#ffffff" stroke="#000000" stroke-width="3"/>
+                <path d="M50 100 L150 170 L250 100" fill="none" stroke="#000000" stroke-width="3"/>
+                
+                <!-- Ojos kawaii -->
+                <circle cx="110" cy="180" r="25" fill="#000000"/>
+                <circle cx="190" cy="180" r="25" fill="#000000"/>
+                <circle cx="120" cy="170" r="8" fill="#ffffff"/>
+                <circle cx="200" cy="170" r="8" fill="#ffffff"/>
+                
+                <!-- Mejillas rosadas -->
+                <circle cx="80" cy="200" r="15" fill="#ffb6c1" opacity="0.6"/>
+                <circle cx="220" cy="200" r="15" fill="#ffb6c1" opacity="0.6"/>
+                
+                <!-- Sonrisa -->
+                <path d="M130 210 Q150 220 170 210" fill="none" stroke="#000000" stroke-width="3"/>
+            </svg>
+        </div>
+        
+        <div class="button-container">
+            <a href="valentine-response.html" class="valentine-button">
+                Will you be my valentine?
+            </a>
+        </div>
+    </div>
+</body>
+</html>
